@@ -1,0 +1,78 @@
+export const projects = [
+  {
+    id: "krishimitra",
+    name: "KrishiMitra",
+    type: "Final Year Project",
+    description:
+      "A digital agriculture assistant for Nepali farmers with crop advisory, AI-based disease detection, weather alerts, market price tracking, expert consultation, chat, government scheme information, and premium features.",
+    techStack: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "FastAPI",
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Cloudinary",
+      "Socket.IO",
+      "Stripe",
+      "Khalti",
+      "Vercel",
+      "Render",
+    ],
+    role: "Full-stack developer and project planner",
+    status: "In development / Final Year Project",
+    liveUrl: "https://example.com/krishimitra-live-link",
+    githubUrl: "https://github.com/your-username/krishimitra",
+  },
+  {
+    id: "smartgov-bot",
+    name: "SmartGov Bot",
+    type: "HackForNepal Project",
+    description:
+      "An intelligent chatbot system designed to make Nepali government services more accessible through dynamic conversation, voice input and output, and form-filling.",
+    techStack: ["Rasa", "Python", "HTML", "CSS", "JavaScript", "Web Speech API"],
+    role: "Team member and developer",
+    team: "Me and the boys",
+    status: "Completed / Hackathon project",
+    liveUrl: "https://example.com/smartgov-bot-live-link",
+    githubUrl: "https://github.com/your-username/smartgov-bot",
+  },
+  {
+    id: "academic-mcq-website",
+    name: "Academic MCQ Website",
+    type: "Academic Project",
+    description:
+      "An academic MCQ practice platform where students can practice questions and logged-in users can contribute questions. It includes authentication, question bank, CRUD operations, an about page, and a terms and conditions page.",
+    techStack: ["MongoDB", "Express.js", "React", "Node.js"],
+    role: "Full-stack developer",
+    status: "Completed",
+    liveUrl: "https://example.com/academic-mcq-live-link",
+    githubUrl: "https://github.com/your-username/academic-mcq-website",
+  },
+  {
+    id: "evileverest-os",
+    name: "macOS Portfolio / EvilEverest OS",
+    type: "Portfolio Project",
+    description:
+      "A macOS-inspired personal portfolio website that presents profile, projects, skills, resume, and contact information through an interactive desktop-like interface. It also tests the reality of vibe coding using AI coding agents.",
+    techStack: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Lucide React",
+      "Zustand",
+      "OpenCode",
+      "OpenRouter",
+    ],
+    role: "Designer, developer, and experiment lead",
+    status: "In development",
+    liveUrl: "https://example.com/evileverest-os-live-link",
+    githubUrl: "https://github.com/your-username/evileverest-os",
+  },
+];
+
+export default projects;

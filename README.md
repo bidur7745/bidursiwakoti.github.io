@@ -1,1 +1,0 @@
-# bidursiwakoti.github.io
