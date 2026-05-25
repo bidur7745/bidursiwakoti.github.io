@@ -24,7 +24,6 @@ import {
   Settings,
   ShieldCheck,
   Sparkles,
-  Terminal,
   UserRound,
   Wifi,
   Zap,
@@ -634,7 +633,7 @@ export default function SettingsApp() {
         </div>
 
         <button type="button" className="settings-account-card" onClick={() => setActiveSection("general")}>
-          <span className="settings-avatar">{personalInfo.preferredName[0]}</span>
+          <span className="settings-avatar"><img src={desktopAssets.menuLogo} alt="" /></span>
           <span>
             <strong>{personalInfo.fullName}</strong>
             <small>EvilEverest Account</small>
