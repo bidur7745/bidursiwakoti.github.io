@@ -16,7 +16,6 @@ import useWindowStore from "../../store/windowStore.js";
 import AboutApp from "../apps/AboutApp.jsx";
 import FinderApp from "../apps/FinderApp.jsx";
 import MailApp from "../apps/MailApp.jsx";
-import ProjectsApp from "../apps/ProjectsApp.jsx";
 import PdfPreviewApp from "../apps/PdfPreviewApp.jsx";
 import ResumeApp from "../apps/ResumeApp.jsx";
 import SettingsApp from "../apps/SettingsApp.jsx";
@@ -62,11 +61,11 @@ const appRegistry = {
     id: "projects",
     label: "Projects",
     title: "Projects",
-    subtitle: "Selected work",
+    subtitle: "All projects folder",
     accent: "blue",
     icon: BriefcaseBusiness,
     iconSrc: desktopAssets.projectsIcon,
-    component: ProjectsApp,
+    component: FinderApp,
   },
   skills: {
     id: "skills",
