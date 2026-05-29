@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import {
   BriefcaseBusiness,
+  Calculator,
   FileText,
   FolderOpen,
   Mail,
@@ -19,7 +20,7 @@ import MailApp from "../apps/MailApp.jsx";
 import PdfPreviewApp from "../apps/PdfPreviewApp.jsx";
 import ResumeApp from "../apps/ResumeApp.jsx";
 import SettingsApp from "../apps/SettingsApp.jsx";
-import SkillsApp from "../apps/SkillsApp.jsx";
+import CalculatorApp from "../apps/CalculatorApp.jsx";
 import TerminalApp from "../apps/TerminalApp.jsx";
 import Window from "../window/Window.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
@@ -67,15 +68,15 @@ const appRegistry = {
     iconSrc: desktopAssets.projectsIcon,
     component: FinderApp,
   },
-  skills: {
-    id: "skills",
-    label: "Skills",
-    title: "Skills",
-    subtitle: "Technical stack",
-    accent: "violet",
-    icon: Sparkles,
+  calculator: {
+    id: "calculator",
+    label: "Calculator",
+    title: "Calculator",
+    subtitle: "Quick calculations",
+    accent: "amber",
+    icon: Calculator,
     iconSrc: desktopAssets.skillsIcon,
-    component: SkillsApp,
+    component: CalculatorApp,
   },
   resume: {
     id: "resume",
@@ -123,7 +124,7 @@ const desktopIcons = [
   appRegistry.about,
   appRegistry.finder,
   appRegistry.projects,
-  appRegistry.skills,
+  appRegistry.calculator,
   appRegistry.resume,
   appRegistry.mail,
   appRegistry.terminal,
@@ -257,12 +258,12 @@ export default function Desktop() {
       onActivate: () => launchApp("projects"),
     },
     {
-      id: "skills",
-      label: "Skills",
-      icon: Sparkles,
+      id: "calculator",
+      label: "Calculator",
+      icon: Calculator,
       iconSrc: desktopAssets.skillsIcon,
-      accent: "violet",
-      onActivate: () => launchApp("skills"),
+      accent: "amber",
+      onActivate: () => launchApp("calculator"),
     },
     {
       id: "resume",
