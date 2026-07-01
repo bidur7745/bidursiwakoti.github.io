@@ -77,6 +77,7 @@ const appRegistry = {
     icon: Calculator,
     iconSrc: desktopAssets.skillsIcon,
     component: CalculatorApp,
+    windowPosition: { top: "84px", left: "calc(50% - 178px)", width: "356px", height: "560px" },
   },
   resume: {
     id: "resume",
@@ -361,7 +362,21 @@ export default function Desktop() {
           overflow: hidden;
         }
 
+        .mac-window-chromeless {
+          border: 0;
+          background: transparent;
+          box-shadow: none;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          overflow: hidden;
+        }
+
         .mac-window-terminal.is-active {
+          border-color: transparent;
+          box-shadow: none;
+        }
+
+        .mac-window-chromeless.is-active {
           border-color: transparent;
           box-shadow: none;
         }
@@ -693,8 +708,14 @@ export default function Desktop() {
                 zIndex={windowState.zIndex}
                 isActive={activeWindow === windowState.appId}
                 isMinimized={Boolean(minimizedWindows[windowState.appId])}
-                position={getWindowPosition(index)}
-                chrome={windowState.appId === "terminal" ? "terminal" : "default"}
+                position={app.windowPosition ?? getWindowPosition(index)}
+                chrome={
+                  windowState.appId === "terminal"
+                    ? "terminal"
+                    : windowState.appId === "calculator"
+                      ? "calculator"
+                      : "default"
+                }
                 onClose={closeWindow}
                 onMinimize={minimizeWindow}
                 onFocus={focusWindow}

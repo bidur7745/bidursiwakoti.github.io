@@ -23,6 +23,8 @@ export default function Window({
   const windowRef = useRef(null);
   const dragControls = useDragControls();
   const isTerminalChrome = chrome === "terminal";
+  const isCalculatorChrome = chrome === "calculator";
+  const isCustomChrome = isTerminalChrome || isCalculatorChrome;
 
   useLayoutEffect(() => {
     if (!isMinimized || !windowRef.current) {
@@ -67,8 +69,8 @@ export default function Window({
     const rect = event.currentTarget.parentElement.getBoundingClientRect();
     const startX = event.clientX;
     const startY = event.clientY;
-    const minWidth = isTerminalChrome ? 420 : 360;
-    const minHeight = isTerminalChrome ? 280 : 260;
+    const minWidth = isTerminalChrome ? 420 : isCalculatorChrome ? 300 : 360;
+    const minHeight = isTerminalChrome ? 280 : isCalculatorChrome ? 430 : 260;
 
     function handlePointerMove(moveEvent) {
       const deltaX = moveEvent.clientX - startX;
@@ -126,7 +128,7 @@ export default function Window({
   }, [isExpanded, position]);
 
   const windowContent =
-    isTerminalChrome && isValidElement(children)
+    isCustomChrome && isValidElement(children)
       ? cloneElement(children, {
           isExpanded,
           onClose: () => onClose(appId),
@@ -143,7 +145,7 @@ export default function Window({
     <motion.article
       ref={windowRef}
       layout
-      className={`mac-window ${isTerminalChrome ? "mac-window-terminal" : ""} ${isActive ? "is-active" : ""} ${isExpanded ? "is-expanded" : ""} ${isMinimized ? "is-minimized" : ""}`}
+      className={`mac-window ${isTerminalChrome ? "mac-window-terminal" : ""} ${isCalculatorChrome ? "mac-window-chromeless" : ""} ${isActive ? "is-active" : ""} ${isExpanded ? "is-expanded" : ""} ${isMinimized ? "is-minimized" : ""}`}
       style={{
         ...windowStyle,
         ...(customSize ?? {}),
@@ -241,7 +243,7 @@ export default function Window({
       }}
       aria-hidden={isMinimized}
     >
-      {!isTerminalChrome ? (
+      {!isCustomChrome ? (
         <WindowHeader
           title={title}
           subtitle={subtitle}
@@ -256,7 +258,7 @@ export default function Window({
         />
       ) : null}
 
-      <div className={`mac-window-body ${isTerminalChrome ? "mac-window-body-terminal" : ""}`}>
+      <div className={`mac-window-body ${isCustomChrome ? "mac-window-body-terminal" : ""}`}>
         {windowContent}
       </div>
 

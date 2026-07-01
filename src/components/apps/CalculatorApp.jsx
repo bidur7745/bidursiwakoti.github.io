@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import "../../assets/style/calculator.css";
+import WindowControls from "../window/WindowControls.jsx";
 
 const OPERATORS = {
   divide: "÷",
@@ -78,7 +80,13 @@ function getOperatorFromKey(key) {
   return null;
 }
 
-export default function CalculatorApp() {
+export default function CalculatorApp({
+  isExpanded = false,
+  onClose,
+  onMinimize,
+  onToggleExpand,
+  onDragStart,
+}) {
   const [display, setDisplay] = useState("0");
   const [storedValue, setStoredValue] = useState(null);
   const [operator, setOperator] = useState(null);
@@ -262,158 +270,27 @@ export default function CalculatorApp() {
 
   return (
     <div className="calculator-app">
-      <style>{`
-        .calculator-app {
-          display: grid;
-          place-items: center;
-          min-height: 100%;
-          margin: -6px;
-          color: #f5f5f7;
-        }
-
-        .calculator-shell {
-          width: min(100%, 330px);
-          min-width: 252px;
-          padding: 16px;
-          border: 1px solid rgba(255, 255, 255, 0.11);
-          border-radius: 30px;
-          background:
-            linear-gradient(180deg, rgba(45, 45, 48, 0.98), rgba(22, 22, 24, 0.98)),
-            #1f1f21;
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.08),
-            0 22px 60px rgba(2, 6, 23, 0.34);
-        }
-
-        .calculator-display {
-          display: grid;
-          align-content: end;
-          min-height: 112px;
-          padding: 10px 6px 16px;
-          text-align: right;
-        }
-
-        .calculator-expression {
-          min-height: 20px;
-          margin: 0 0 6px;
-          color: rgba(245, 245, 247, 0.46);
-          font-size: 0.9rem;
-          line-height: 1.2;
-        }
-
-        .calculator-value {
-          margin: 0;
-          overflow: hidden;
-          color: #ffffff;
-          font-size: clamp(2.45rem, 11vw, 4.25rem);
-          font-weight: 300;
-          letter-spacing: 0;
-          line-height: 0.98;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .calculator-grid {
-          display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 10px;
-        }
-
-        .calculator-key {
-          display: inline-grid;
-          place-items: center;
-          min-width: 0;
-          aspect-ratio: 1;
-          border: 0;
-          border-radius: 999px;
-          background: linear-gradient(180deg, #626266, #4b4b4f);
-          color: #ffffff;
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.12),
-            0 4px 9px rgba(0, 0, 0, 0.18);
-          cursor: pointer;
-          font-size: clamp(1.2rem, 3.4vw, 1.7rem);
-          font-weight: 400;
-          line-height: 1;
-          transition:
-            background-color 120ms ease,
-            box-shadow 120ms ease,
-            filter 120ms ease,
-            transform 90ms ease;
-        }
-
-        .calculator-key:hover {
-          filter: brightness(1.12);
-        }
-
-        .calculator-key:active {
-          transform: scale(0.96);
-          filter: brightness(1.2);
-        }
-
-        .calculator-key:focus-visible {
-          outline: 2px solid rgba(255, 255, 255, 0.72);
-          outline-offset: 3px;
-        }
-
-        .calculator-key-utility {
-          background: linear-gradient(180deg, #c7c7cc, #a6a6ab);
-          color: #111113;
-        }
-
-        .calculator-key-operator {
-          background: linear-gradient(180deg, #ffb13b, #ff9500);
-          color: #ffffff;
-          font-size: clamp(1.55rem, 4.4vw, 2.25rem);
-        }
-
-        .calculator-key-operator.is-active {
-          background: #ffffff;
-          color: #ff9500;
-        }
-
-        .calculator-key-wide {
-          grid-column: span 2;
-          aspect-ratio: auto;
-          justify-content: start;
-          padding-left: 26px;
-          border-radius: 999px;
-        }
-
-        .calculator-hint {
-          margin: 12px 4px 0;
-          color: rgba(245, 245, 247, 0.38);
-          font-size: 0.72rem;
-          line-height: 1.35;
-          text-align: center;
-        }
-
-        @media (max-width: 480px) {
-          .calculator-app {
-            margin: 0;
-          }
-
-          .calculator-shell {
-            width: min(100%, 304px);
-            padding: 13px;
-            border-radius: 26px;
-          }
-
-          .calculator-display {
-            min-height: 92px;
-          }
-
-          .calculator-grid {
-            gap: 8px;
-          }
-
-          .calculator-key-wide {
-            padding-left: 22px;
-          }
-        }
-      `}</style>
-
       <section className="calculator-shell" aria-label="Calculator">
+        <header
+          className="calculator-titlebar"
+          onPointerDown={(event) => {
+            if (event.target.closest(".window-controls")) {
+              return;
+            }
+
+            onDragStart?.(event);
+          }}
+        >
+          <WindowControls
+            isExpanded={isExpanded}
+            onClose={onClose}
+            onMinimize={onMinimize}
+            onToggleExpand={onToggleExpand}
+          />
+          <p className="calculator-title">Calculator</p>
+          <span className="calculator-titlebar-spacer" aria-hidden="true" />
+        </header>
+
         <div className="calculator-display" aria-live="polite">
           <p className="calculator-expression">{expressionLabel}</p>
           <h1 className="calculator-value">{display}</h1>
@@ -448,8 +325,6 @@ export default function CalculatorApp() {
             );
           })}
         </div>
-
-        <p className="calculator-hint">Keyboard: numbers, +, -, *, /, Enter, Escape, Backspace</p>
       </section>
     </div>
   );
