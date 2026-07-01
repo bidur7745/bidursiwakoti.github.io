@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import startupProgress from "../../assets/macos-startup-apple-logo-progress-bar.png";
+import "../../assets/style/boot-sequence.css";
 import welcomeScreen from "../../assets/welcome screen.webp";
 
 const PASSWORD_STORAGE_KEY = "evileverest-os-password";
@@ -23,8 +23,7 @@ function getStoredAuth() {
 export default function BootSequence({ onUnlock }) {
   const storedAuth = useMemo(getStoredAuth, []);
   const [stage, setStage] = useState("boot");
-  const [isPromptVisible, setIsPromptVisible] = useState(false);
-  const [mode, setMode] = useState(() => (storedAuth.password ? "login" : "setup"));
+  const [mode] = useState(() => (storedAuth.password ? "login" : "setup"));
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordHint, setPasswordHint] = useState(storedAuth.hint);
@@ -32,37 +31,25 @@ export default function BootSequence({ onUnlock }) {
   const [savedHint, setSavedHint] = useState(storedAuth.hint);
   const [error, setError] = useState("");
   const [showHint, setShowHint] = useState(false);
-  const [bootLine, setBootLine] = useState(0);
-
-  const bootMessages = [
-    "Initializing EvilEverest OS",
-    "Loading profile workspace",
-    "Preparing portfolio desktop",
-  ];
+  const currentTime = useMemo(
+    () =>
+      new Intl.DateTimeFormat("en", {
+        weekday: "short",
+        hour: "numeric",
+        minute: "2-digit",
+      }).format(new Date()),
+    []
+  );
 
   useEffect(() => {
-    const lineTimer = window.setInterval(() => {
-      setBootLine((current) => Math.min(current + 1, bootMessages.length - 1));
-    }, 650);
-
     const bootTimer = window.setTimeout(() => {
       setStage("welcome");
     }, 2600);
 
     return () => {
-      window.clearInterval(lineTimer);
       window.clearTimeout(bootTimer);
     };
-  }, [bootMessages.length]);
-
-  function handleOpenPrompt() {
-    if (stage !== "welcome") {
-      return;
-    }
-
-    setIsPromptVisible(true);
-    setError("");
-  }
+  }, []);
 
   function handleSetupSubmit(event) {
     event.preventDefault();
@@ -119,22 +106,15 @@ export default function BootSequence({ onUnlock }) {
   if (stage === "boot") {
     return (
       <main className="boot-screen" aria-label="Boot screen">
-        <div className="boot-screen-background" style={{ backgroundImage: `url(${startupProgress})` }} />
         <div className="boot-shell">
           <div className="boot-apple-mark" aria-hidden="true">
             <div className="boot-apple-leaf" />
             <div className="boot-apple-body" />
           </div>
-          <div className="boot-status-panel">
-            <p className="boot-status-title">macOS portfolio startup</p>
-            <div className="boot-status-list" aria-live="polite">
-              {bootMessages.map((message, index) => (
-                <p key={message} className={index <= bootLine ? "is-visible" : ""}>
-                  {message}
-                </p>
-              ))}
-            </div>
+          <div className="boot-progress-track" aria-hidden="true">
+            <div className="boot-progress-fill" />
           </div>
+          <p className="boot-caption">EvilEverest OS</p>
         </div>
       </main>
     );
@@ -144,100 +124,91 @@ export default function BootSequence({ onUnlock }) {
     <main
       className="welcome-screen"
       aria-label="Welcome screen"
-      onClick={handleOpenPrompt}
-      style={{ backgroundImage: `linear-gradient(rgba(2, 6, 23, 0.14), rgba(2, 6, 23, 0.42)), url(${welcomeScreen})` }}
+      style={{ backgroundImage: `url(${welcomeScreen})` }}
     >
-      <div className="welcome-overlay">
-        <section className="welcome-lockscreen-panel glass-panel">
-          <div className="welcome-avatar">B</div>
-          <h1>Bidur Siwakoti</h1>
-          <p className="welcome-lockscreen-subtitle">EvilEverest OS</p>
-          <p className="welcome-lockscreen-caption">
-            {isPromptVisible
-              ? mode === "setup"
-                ? "Create your Mac-style portfolio password"
-                : "Enter your password to continue"
-              : "Click anywhere to begin"}
-          </p>
-        </section>
+      <div className="welcome-topbar" aria-label="Current time">
+        <span>{currentTime}</span>
+      </div>
 
-        {isPromptVisible ? (
-          <form
-            className="welcome-password-card glass-panel"
-            onClick={(event) => event.stopPropagation()}
-            onSubmit={handleSubmit}
-          >
-            <div className="welcome-password-header">
-              <div className="welcome-traffic-lights" aria-hidden="true">
-                <span className="traffic-red" />
-                <span className="traffic-yellow" />
-                <span className="traffic-green" />
-              </div>
-              <p>{mode === "setup" ? "Set Password" : "Login"}</p>
-            </div>
+      <section className="welcome-login">
+        <div className="welcome-avatar" aria-hidden="true">B</div>
+        <h1 className="welcome-title">Bidur Siwakoti</h1>
+        <p className="welcome-subtitle">
+          {mode === "setup" ? "Set up EvilEverest OS" : "EvilEverest OS"}
+        </p>
 
-            {mode === "setup" ? (
-              <>
-                <label className="welcome-password-label" htmlFor="portfolio-password">
-                  New password
-                </label>
+        <form className="welcome-form" onSubmit={handleSubmit}>
+          {mode === "setup" ? (
+            <>
+              <div className="welcome-setup-fields">
                 <input
                   autoFocus
                   id="portfolio-password"
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="Create a password"
-                  className="welcome-password-input"
+                  placeholder="New password"
+                  className="welcome-input"
+                  aria-label="New password"
                 />
-                <label className="welcome-password-label" htmlFor="portfolio-password-confirm">
-                  Confirm password
-                </label>
                 <input
                   id="portfolio-password-confirm"
                   type="password"
                   value={confirmPassword}
                   onChange={(event) => setConfirmPassword(event.target.value)}
-                  placeholder="Type it again"
-                  className="welcome-password-input"
+                  placeholder="Confirm password"
+                  className="welcome-input"
+                  aria-label="Confirm password"
                 />
-                <label className="welcome-password-label" htmlFor="portfolio-password-hint">
-                  Save one hint
-                </label>
                 <input
                   id="portfolio-password-hint"
                   type="text"
                   value={passwordHint}
                   onChange={(event) => setPasswordHint(event.target.value)}
-                  placeholder="A clue only you understand"
-                  className="welcome-password-input"
+                  placeholder="Password hint"
+                  className="welcome-input"
+                  aria-label="Password hint"
                 />
-              </>
-            ) : (
-              <>
-                <label className="welcome-password-label" htmlFor="portfolio-password-login">
-                  Password
-                </label>
+              </div>
+              <button type="submit" className="welcome-submit-wide">
+                Continue
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="welcome-password-row">
                 <input
                   autoFocus
                   id="portfolio-password-login"
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder="Enter password"
-                  className="welcome-password-input"
+                  placeholder="Enter Password"
+                  className="welcome-input"
+                  aria-label="Password"
                 />
-                {showHint && savedHint ? <p className="welcome-password-hint">Hint: {savedHint}</p> : null}
-              </>
-            )}
+                <button type="submit" className="welcome-submit-round" aria-label="Enter desktop">
+                  <span aria-hidden="true">&gt;</span>
+                </button>
+              </div>
+            </>
+          )}
 
-            {error ? <p className="welcome-password-error">{error}</p> : null}
+          {error ? (
+            <p className="welcome-message is-error">
+              {error}
+              {showHint && savedHint ? ` Hint: ${savedHint}` : ""}
+            </p>
+          ) : (
+            <p className="welcome-message">
+              {mode === "setup" ? "Create a local password for this portfolio." : "Enter your password to continue."}
+            </p>
+          )}
+        </form>
+      </section>
 
-            <button type="submit" className="welcome-password-button">
-              {mode === "setup" ? "Save And Enter Desktop" : "Enter Desktop"}
-            </button>
-          </form>
-        ) : null}
+      <div className="welcome-footer">
+        <span>Portfolio desktop</span>
       </div>
     </main>
   );
