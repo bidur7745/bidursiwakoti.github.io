@@ -1,4 +1,29 @@
-import { Download, ExternalLink, GraduationCap, Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { Code2, Download, ExternalLink, GraduationCap, Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import {
+  SiDotnet,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiLaravel,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOpenjdk,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiRender,
+  SiShopify,
+  SiTailwindcss,
+  SiVercel,
+  SiVite,
+  SiCss,
+} from "react-icons/si";
 import { education } from "../../data/education.js";
 import { links } from "../../data/links.js";
 import { personalInfo } from "../../data/personalInfo.js";
@@ -27,12 +52,52 @@ const experience = [
   },
 ];
 
-const skillSummary = [
-  ...skills.frontend.slice(0, 4),
-  ...skills.backend.slice(0, 3),
-  ...skills.databases.slice(0, 2),
-  ...skills.shopify.slice(0, 2),
+const skillGroups = [
+  {
+    title: "Languages",
+    items: ["JavaScript", "Python", "Java", "HTML", "CSS", "Shopify Liquid"],
+  },
+  {
+    title: "Frameworks & Libraries",
+    items: ["React.js", "Next.js", "Vite", "Tailwind CSS", "Node.js", "Express.js", ".NET", "Laravel", "FastAPI"],
+  },
+  {
+    title: "Databases",
+    items: ["PostgreSQL", "MongoDB", "MySQL", "Neon PostgreSQL"],
+  },
+  {
+    title: "Tools & Platforms",
+    items: ["Git", "GitHub", "Docker", "Vercel", "Render", "Shopify Theme Development"],
+  },
 ];
+
+const skillIconMap = {
+  "React.js": { icon: SiReact, color: "#61dafb" },
+  "Next.js": { icon: SiNextdotjs, color: "#f8fafc" },
+  Vite: { icon: SiVite, color: "#a78bfa" },
+  JavaScript: { icon: SiJavascript, color: "#f7df1e" },
+  Python: { icon: SiPython, color: "#facc15" },
+  Java: { icon: SiOpenjdk, color: "#f97316" },
+  HTML: { icon: SiHtml5, color: "#fb923c" },
+  CSS: { icon: SiCss, color: "#60a5fa" },
+  "Tailwind CSS": { icon: SiTailwindcss, color: "#38bdf8" },
+  "Node.js": { icon: SiNodedotjs, color: "#86efac" },
+  "Express.js": { icon: SiExpress, color: "#f8fafc" },
+  ".NET": { icon: SiDotnet, color: "#c4b5fd" },
+  Laravel: { icon: SiLaravel, color: "#fb7185" },
+  FastAPI: { icon: SiFastapi, color: "#2dd4bf" },
+  PostgreSQL: { icon: SiPostgresql, color: "#93c5fd" },
+  MongoDB: { icon: SiMongodb, color: "#6ee7b7" },
+  MySQL: { icon: SiMysql, color: "#7dd3fc" },
+  "Neon PostgreSQL": { icon: SiPostgresql, color: "#67e8f9" },
+  Git: { icon: SiGit, color: "#fb923c" },
+  GitHub: { icon: SiGithub, color: "#f8fafc" },
+  Docker: { icon: SiDocker, color: "#60a5fa" },
+  Vercel: { icon: SiVercel, color: "#f8fafc" },
+  Render: { icon: SiRender, color: "#a78bfa" },
+  "Shopify Theme Development": { icon: SiShopify, color: "#bef264" },
+  "Shopify Liquid": { icon: SiShopify, color: "#bef264" },
+};
 
 const majorProjects = projects.slice(0, 4);
 
@@ -95,12 +160,27 @@ export default function ResumeApp() {
           </div>
         </Section>
 
-        <Section title="Skills Summary">
-          <div style={styles.badgeWrap}>
-            {skillSummary.map((item) => (
-              <span key={item} style={styles.badge}>
-                {item}
-              </span>
+        <Section title="Skills">
+          <div style={styles.skillGroupStack}>
+            {skillGroups.map((group) => (
+              <div key={group.title} style={styles.skillGroup}>
+                <h3 style={styles.skillGroupTitle}>{group.title}</h3>
+                <div style={styles.skillGrid}>
+                  {group.items.map((item) => {
+                    const skillIcon = skillIconMap[item] ?? { icon: Code2, color: "#bfdbfe" };
+                    const SkillIcon = skillIcon.icon;
+
+                    return (
+                      <span key={item} style={styles.skillTile}>
+                        <span style={{ ...styles.skillIcon, color: skillIcon.color }}>
+                          <SkillIcon size={18} strokeWidth={SkillIcon === Code2 ? 2 : undefined} />
+                        </span>
+                        <span>{item}</span>
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
             ))}
           </div>
         </Section>
@@ -266,18 +346,47 @@ const styles = {
     color: "rgba(226,232,240,0.88)",
     lineHeight: 1.7,
   },
-  badgeWrap: {
-    display: "flex",
-    flexWrap: "wrap",
+  skillGroupStack: {
+    display: "grid",
+    gap: "16px",
+  },
+  skillGroup: {
+    display: "grid",
     gap: "10px",
   },
-  badge: {
-    padding: "9px 12px",
-    borderRadius: "999px",
-    background: "rgba(59,130,246,0.12)",
-    border: "1px solid rgba(96,165,250,0.14)",
+  skillGroupTitle: {
+    margin: 0,
+    color: "#bfdbfe",
+    fontSize: "0.82rem",
+    letterSpacing: "0.08em",
+    textTransform: "uppercase",
+  },
+  skillGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(138px, 1fr))",
+    gap: "10px",
+  },
+  skillTile: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    minHeight: "42px",
+    padding: "9px 11px",
+    borderRadius: "14px",
+    background: "linear-gradient(180deg, rgba(30,41,59,0.72), rgba(15,23,42,0.56))",
+    border: "1px solid rgba(148,163,184,0.16)",
     color: "#dbeafe",
     fontSize: "0.84rem",
+    lineHeight: 1.3,
+  },
+  skillIcon: {
+    display: "inline-grid",
+    placeItems: "center",
+    width: "28px",
+    height: "28px",
+    flex: "0 0 auto",
+    borderRadius: "9px",
+    background: "rgba(255,255,255,0.07)",
   },
   projectCard: {
     padding: "16px",

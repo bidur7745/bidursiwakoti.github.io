@@ -7,11 +7,11 @@ export const personalInfo = {
   currentRole: "Student, Web Developer, Shopify Theme Developer, and AI/Software Project Builder",
   tagline: "Building meaningful technology with creativity, curiosity, and purpose.",
   shortIntroduction:
-    "I am Bidur Siwakoti, also known as EvilEverest. I am a computing student from Nepal with a strong interest in web development, artificial intelligence, agriculture technology, cybersecurity, blockchain, politics, literature, and social impact projects. I enjoy building meaningful digital systems that solve real-world problems, especially in the context of Nepal.",
+    "I am Bidur Siwakoti, also known as EvilEverest. I am a Nepal-based B.Sc. Computing student and project-focused developer interested in practical web, full-stack, Shopify, IoT, data-driven, and AI-assisted software solutions. I enjoy building useful digital products connected to education, agriculture, public services, local business growth, and social impact.",
   professionalIdentity:
-    "I am a developer focused on creating modern web applications, interactive user interfaces, AI-assisted platforms, Shopify themes, and academic software projects. My work combines technical development, research, documentation, UI/UX thinking, and practical problem solving.",
+    "I am a Nepal-based B.Sc. Computing student and project-focused developer building practical web, full-stack, Shopify, IoT, data-driven, and AI-assisted software solutions. My work combines frontend development, backend logic, UI thinking, research, and documentation to turn ideas into meaningful, accessible digital products for real users.",
   bio:
-    "Bidur Siwakoti, also known as EvilEverest, is a Nepali BSc Computing student at Itahari International College affiliated with London Metropolitan University. He is a project-focused developer interested in MERN, Node.js, React, Python, .NET, Shopify, AI, agriculture technology, cybersecurity, blockchain, politics, English literature, and sociology.",
+    "Bidur Siwakoti, also known as EvilEverest, is a Nepal-based B.Sc. Computing student at Itahari International College affiliated with London Metropolitan University. His work includes MERN applications, Java EE systems, IoT accident detection, educational platforms, vehicle rental systems, data analytics reports, and agriculture-focused digital solutions for Nepal.",
   personality: ["Direct", "Curious", "Ambitious", "Creative", "Practical", "Project-focused"],
   roles: ["Student", "Web Developer", "Shopify Theme Developer", "AI/Software Project Builder"],
   interests: {
