@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "../../assets/style/boot-sequence.css";
+import appleIcon from "../../assets/icon/apple_icon.png";
 import welcomeScreen from "../../assets/welcome screen.webp";
 
 const PASSWORD_STORAGE_KEY = "evileverest-os-password";
@@ -107,10 +108,7 @@ export default function BootSequence({ onUnlock }) {
     return (
       <main className="boot-screen" aria-label="Boot screen">
         <div className="boot-shell">
-          <div className="boot-apple-mark" aria-hidden="true">
-            <div className="boot-apple-leaf" />
-            <div className="boot-apple-body" />
-          </div>
+          <img src={appleIcon} alt="" className="boot-apple-icon" aria-hidden="true" />
           <div className="boot-progress-track" aria-hidden="true">
             <div className="boot-progress-fill" />
           </div>
