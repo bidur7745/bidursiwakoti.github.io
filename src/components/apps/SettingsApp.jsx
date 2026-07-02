@@ -258,7 +258,7 @@ export default function SettingsApp() {
 
   const active = settingsSections.find((section) => section.id === activeSection) ?? settingsSections[0];
   const ActiveIcon = active.icon;
-  const primaryEmail = links.email.personal.replace("mailto:", "");
+  const primaryEmail = links.email.work.replace("mailto:", "");
 
   function launchApp(appId) {
     if (!openedWindows[appId]) {
@@ -500,7 +500,7 @@ export default function SettingsApp() {
           <SettingsRow icon={Globe} label="Portfolio URL" value={links.portfolio} href={links.portfolio} />
           <SettingsRow icon={ExternalLink} label="GitHub" value="bidur7745" href={links.github} />
           <SettingsRow icon={ExternalLink} label="LinkedIn" value="Profile link" href={links.linkedin} />
-          <SettingsRow icon={Mail} label="Email" value={primaryEmail} href={links.email.personal} />
+          <SettingsRow icon={Mail} label="Email" value={primaryEmail} href={links.email.work} />
         </section>
 
         <section className="settings-connection-grid">

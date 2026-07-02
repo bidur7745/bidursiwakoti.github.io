@@ -27,7 +27,7 @@ export const projects = [
     status: "In development / Final Year Project",
     githubOwner: "bidur7745",
     githubRepo: "KrishiMitra-Bidur-Siwakoti",
-    liveUrl: "https://example.com/krishimitra-live-link",
+    liveUrl: "https://krishimitrafyp.vercel.app/",
     githubUrl: "https://github.com/bidur7745/KrishiMitra-Bidur-Siwakoti",
   },
   {
@@ -43,7 +43,7 @@ export const projects = [
     status: "Completed / Hackathon project",
     githubOwner: "bidur7745",
     githubRepo: "SmartGov_bot",
-    liveUrl: "https://example.com/smartgov-bot-live-link",
+    liveUrl: "",
     githubUrl: "https://github.com/bidur7745/SmartGov_bot",
   },
   {
@@ -58,7 +58,7 @@ export const projects = [
     status: "Completed",
     githubOwner: "bidur7745",
     githubRepo: "MCQpedia-Nepal",
-    liveUrl: "https://example.com/academic-mcq-live-link",
+    liveUrl: "https://mc-qpedia-nepal.vercel.app/",
     githubUrl: "https://github.com/bidur7745/MCQpedia-Nepal",
   },
   {
@@ -82,7 +82,7 @@ export const projects = [
     status: "In development",
     githubOwner: "bidur7745",
     githubRepo: "Portfolio",
-    liveUrl: "https://example.com/evileverest-os-live-link",
+    liveUrl: "https://bidursiwakoti.com.np",
     githubUrl: "https://github.com/bidur7745/Portfolio",
   },
   {

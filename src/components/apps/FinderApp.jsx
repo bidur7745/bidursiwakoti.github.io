@@ -839,22 +839,35 @@ export default function FinderApp() {
             <p style={styles.previewInfoRow}><span>Repo</span><span>{selectedProject.githubRepo || "Not connected"}</span></p>
           </div>
 
-          <button
-            type="button"
-            style={{
-              ...styles.previewButton,
-              ...(hasRepo ? null : styles.previewButtonDisabled),
-            }}
-            onClick={() => {
-              if (hasRepo && githubUrl) {
-                window.open(githubUrl, "_blank", "noopener,noreferrer");
-              }
-            }}
-            disabled={!hasRepo}
-          >
-            <span>Open on GitHub</span>
-            <ExternalLink size={14} strokeWidth={2} />
-          </button>
+          <div style={styles.previewButtonStack}>
+            {selectedProject.liveUrl ? (
+              <button
+                type="button"
+                style={styles.previewButton}
+                onClick={() => window.open(selectedProject.liveUrl, "_blank", "noopener,noreferrer")}
+              >
+                <span>Live Project</span>
+                <ExternalLink size={14} strokeWidth={2} />
+              </button>
+            ) : null}
+
+            <button
+              type="button"
+              style={{
+                ...styles.previewButton,
+                ...(hasRepo ? null : styles.previewButtonDisabled),
+              }}
+              onClick={() => {
+                if (hasRepo && githubUrl) {
+                  window.open(githubUrl, "_blank", "noopener,noreferrer");
+                }
+              }}
+              disabled={!hasRepo}
+            >
+              <span>Open on GitHub</span>
+              <ExternalLink size={14} strokeWidth={2} />
+            </button>
+          </div>
         </div>
       );
     }
@@ -1460,6 +1473,13 @@ const styles = {
     color: "#eff6ff",
     padding: "8px 12px",
     fontSize: "0.84rem",
+  },
+  previewButtonStack: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "8px",
+    marginTop: "4px",
   },
   previewButtonDisabled: {
     opacity: 0.5,

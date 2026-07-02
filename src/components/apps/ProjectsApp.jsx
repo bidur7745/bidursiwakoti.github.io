@@ -11,8 +11,8 @@ const fallbackProjects = [
     techStack: ["React", "Node.js", "Express.js", "MongoDB"],
     role: "Full-stack developer",
     status: "Project details to be expanded",
-    liveUrl: "https://example.com/fundhive-live-link",
-    githubUrl: "https://github.com/your-username/fundhive",
+    liveUrl: "",
+    githubUrl: "",
   },
   {
     id: "breathe-now",
@@ -22,8 +22,8 @@ const fallbackProjects = [
     techStack: ["React", "JavaScript", "CSS"],
     role: "Frontend developer",
     status: "Project details to be expanded",
-    liveUrl: "https://example.com/breathenow-live-link",
-    githubUrl: "https://github.com/your-username/breathenow",
+    liveUrl: "",
+    githubUrl: "",
   },
   {
     id: "derefund",
@@ -33,8 +33,8 @@ const fallbackProjects = [
     techStack: ["React", "Node.js", "Blockchain Concepts"],
     role: "Concept designer and developer",
     status: "Project details to be expanded",
-    liveUrl: "https://example.com/derefund-live-link",
-    githubUrl: "https://github.com/your-username/derefund",
+    liveUrl: "",
+    githubUrl: "",
   },
   {
     id: "shopify-theme-work",
@@ -44,8 +44,8 @@ const fallbackProjects = [
     techStack: ["Shopify Liquid", "JavaScript", "HTML", "CSS"],
     role: "Shopify Theme Developer",
     status: "Ongoing",
-    liveUrl: "https://example.com/shopify-theme-work-live-link",
-    githubUrl: "https://github.com/your-username/shopify-theme-work",
+    liveUrl: "",
+    githubUrl: "",
   },
 ];
 
@@ -64,7 +64,7 @@ const orderedNames = [
   "BreatheNow",
   "DeReFund",
   "Shopify Theme Work",
-  "macOS Portfolio / EvilEverest OS",
+  "EvilEverest OS",
 ];
 
 const projectList = orderedNames
@@ -72,6 +72,10 @@ const projectList = orderedNames
   .filter(Boolean);
 
 function ActionLink({ href, icon: Icon, label }) {
+  if (!href) {
+    return null;
+  }
+
   return (
     <a href={href} target="_blank" rel="noreferrer" style={styles.actionLink}>
       <Icon size={15} strokeWidth={2} />
@@ -129,8 +133,8 @@ export default function ProjectsApp() {
             </div>
 
             <div style={styles.actions}>
-              <ActionLink href={project.liveUrl || "https://example.com/project-live-link"} icon={ExternalLink} label="Live Link" />
-              <ActionLink href={project.githubUrl || "https://github.com/your-username/project-placeholder"} icon={FaGithub} label="GitHub" />
+              <ActionLink href={project.liveUrl} icon={ExternalLink} label="Live Link" />
+              <ActionLink href={project.githubUrl} icon={FaGithub} label="GitHub" />
             </div>
           </article>
         ))}

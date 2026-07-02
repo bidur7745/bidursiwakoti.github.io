@@ -128,38 +128,6 @@ export default function ResumeApp() {
       </section>
 
       <div style={styles.grid}>
-        <Section title="Education">
-          <div style={styles.stack}>
-            {education.map((item) => (
-              <article key={item.id} style={styles.timelineCard}>
-                <div style={styles.timelineTop}>
-                  <div style={styles.iconWrap}>
-                    <GraduationCap size={16} strokeWidth={2} />
-                  </div>
-                  <span style={styles.period}>{item.period}</span>
-                </div>
-                <h3 style={styles.itemTitle}>{item.degree}</h3>
-                <p style={styles.itemMeta}>{item.institution}</p>
-                {item.affiliation ? <p style={styles.itemMeta}>{item.affiliation}</p> : null}
-                {item.status ? <p style={styles.itemText}>{item.status}</p> : null}
-                {item.grade ? <p style={styles.itemText}>{item.grade}</p> : null}
-              </article>
-            ))}
-          </div>
-        </Section>
-
-        <Section title="Experience">
-          <div style={styles.stack}>
-            {experience.map((item) => (
-              <article key={item.title} style={styles.timelineCard}>
-                <h3 style={styles.itemTitle}>{item.title}</h3>
-                <p style={styles.itemMeta}>{item.organization}</p>
-                <p style={styles.itemText}>{item.description}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-
         <Section title="Skills">
           <div style={styles.skillGroupStack}>
             {skillGroups.map((group) => (
@@ -186,7 +154,7 @@ export default function ResumeApp() {
         </Section>
 
         <Section title="Major Projects">
-          <div style={styles.stack}>
+          <div style={styles.cardGrid}>
             {majorProjects.map((project) => (
               <article key={project.id} style={styles.projectCard}>
                 <div style={styles.projectTop}>
@@ -198,6 +166,52 @@ export default function ResumeApp() {
                 </div>
                 <p style={styles.itemText}>{project.description}</p>
                 <p style={styles.projectRole}><strong>Role:</strong> {project.role}</p>
+                <div style={styles.projectActions}>
+                  {project.liveUrl ? (
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer" style={styles.projectActionLink}>
+                      <ExternalLink size={14} strokeWidth={2} />
+                      <span>Live</span>
+                    </a>
+                  ) : null}
+                  {project.githubUrl ? (
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer" style={styles.projectActionLink}>
+                      <SiGithub size={14} />
+                      <span>GitHub</span>
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Experience">
+          <div style={styles.cardGrid}>
+            {experience.map((item) => (
+              <article key={item.title} style={styles.timelineCard}>
+                <h3 style={styles.itemTitle}>{item.title}</h3>
+                <p style={styles.itemMeta}>{item.organization}</p>
+                <p style={styles.itemText}>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Education">
+          <div style={styles.cardGrid}>
+            {education.map((item) => (
+              <article key={item.id} style={styles.timelineCard}>
+                <div style={styles.timelineTop}>
+                  <div style={styles.iconWrap}>
+                    <GraduationCap size={16} strokeWidth={2} />
+                  </div>
+                  <span style={styles.period}>{item.period}</span>
+                </div>
+                <h3 style={styles.itemTitle}>{item.degree}</h3>
+                <p style={styles.itemMeta}>{item.institution}</p>
+                {item.affiliation ? <p style={styles.itemMeta}>{item.affiliation}</p> : null}
+                {item.status ? <p style={styles.itemText}>{item.status}</p> : null}
+                {item.grade ? <p style={styles.itemText}>{item.grade}</p> : null}
               </article>
             ))}
           </div>
@@ -205,9 +219,9 @@ export default function ResumeApp() {
 
         <Section title="Contact Info">
           <div style={styles.contactStack}>
-            <a href={links.email.personal} style={styles.contactRow}>
+            <a href={links.email.work} style={styles.contactRow}>
               <Mail size={16} strokeWidth={2} />
-              <span>{links.email.personal.replace("mailto:", "")}</span>
+              <span>{links.email.work.replace("mailto:", "")}</span>
             </a>
             <a href={links.phone} style={styles.contactRow}>
               <Phone size={16} strokeWidth={2} />
@@ -285,11 +299,16 @@ const styles = {
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+    gridTemplateColumns: "1fr",
     gap: "18px",
+    alignItems: "start",
   },
   sectionCard: {
     display: "grid",
+    alignContent: "start",
+    alignSelf: "start",
+    width: "100%",
+    boxSizing: "border-box",
     gap: "16px",
     padding: "20px",
     borderRadius: "22px",
@@ -304,6 +323,12 @@ const styles = {
   stack: {
     display: "grid",
     gap: "14px",
+  },
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
+    gap: "14px",
+    alignItems: "start",
   },
   timelineCard: {
     padding: "16px",
@@ -348,11 +373,23 @@ const styles = {
   },
   skillGroupStack: {
     display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
     gap: "16px",
+    alignItems: "start",
+    padding: "16px",
+    borderRadius: "20px",
+    background:
+      "linear-gradient(135deg, rgba(37,99,235,0.08), rgba(15,23,42,0.22) 48%, rgba(124,58,237,0.08))",
+    border: "1px solid rgba(148,163,184,0.08)",
+    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
   },
   skillGroup: {
     display: "grid",
     gap: "10px",
+    padding: "16px",
+    borderRadius: "18px",
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(255,255,255,0.06)",
   },
   skillGroupTitle: {
     margin: 0,
@@ -413,6 +450,25 @@ const styles = {
     margin: "10px 0 0",
     color: "#e2e8f0",
     lineHeight: 1.6,
+  },
+  projectActions: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginTop: "12px",
+  },
+  projectActionLink: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "7px",
+    minHeight: "32px",
+    padding: "7px 10px",
+    borderRadius: "10px",
+    border: "1px solid rgba(96,165,250,0.18)",
+    background: "rgba(59,130,246,0.12)",
+    color: "#dbeafe",
+    textDecoration: "none",
+    fontSize: "0.78rem",
   },
   contactStack: {
     display: "grid",

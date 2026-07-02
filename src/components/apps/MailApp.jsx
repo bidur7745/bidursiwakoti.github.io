@@ -51,10 +51,10 @@ export default function MailApp() {
 
         <div style={styles.linksStack}>
           <LinkCard
-            href={links.email.personal}
+            href={links.email.work}
             icon={Mail}
             label="Email"
-            value={links.email.personal.replace("mailto:", "")}
+            value={links.email.work.replace("mailto:", "")}
           />
           <LinkCard href={links.github} icon={FaGithub} label="GitHub" value="bidur7745" />
           <LinkCard href={links.linkedin} icon={FaLinkedinIn} label="LinkedIn" value="Profile link" />
