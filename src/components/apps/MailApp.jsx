@@ -12,6 +12,10 @@ const initialForm = {
 };
 
 function LinkCard({ href, icon: Icon, label, value }) {
+  if (!href) {
+    return null;
+  }
+
   return (
     <a href={href} target={href.startsWith("mailto:") ? undefined : "_blank"} rel="noreferrer" style={styles.linkCard}>
       <span style={styles.linkIconWrap}>
@@ -57,7 +61,7 @@ export default function MailApp() {
             value={links.email.work.replace("mailto:", "")}
           />
           <LinkCard href={links.github} icon={FaGithub} label="GitHub" value="bidur7745" />
-          <LinkCard href={links.linkedin} icon={FaLinkedinIn} label="LinkedIn" value="Profile link" />
+          <LinkCard href={links.linkedin} icon={FaLinkedinIn} label="LinkedIn" value="LinkedIn" />
           <LinkCard href={links.portfolio} icon={Globe} label="Portfolio" value="EvilEverest OS" />
         </div>
       </section>

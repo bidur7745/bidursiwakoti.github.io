@@ -297,14 +297,16 @@ export default function Desktop() {
       accent: "slate",
       href: links.github,
     },
-    {
+    links.linkedin
+      ? {
       id: "linkedin",
       label: "LinkedIn",
       icon: FaLinkedinIn,
       accent: "sky",
       href: links.linkedin,
-    },
-  ].map((item) => ({
+    }
+      : null,
+  ].filter(Boolean).map((item) => ({
     ...item,
     isOpen: Boolean(openedWindows[item.id]),
     isMinimized: Boolean(minimizedWindows[item.id]),

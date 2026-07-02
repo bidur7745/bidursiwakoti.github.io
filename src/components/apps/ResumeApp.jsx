@@ -235,10 +235,12 @@ export default function ResumeApp() {
               <ExternalLink size={16} strokeWidth={2} />
               <span>GitHub</span>
             </a>
-            <a href={links.linkedin} target="_blank" rel="noreferrer" style={styles.contactRow}>
-              <Sparkles size={16} strokeWidth={2} />
-              <span>LinkedIn</span>
-            </a>
+            {links.linkedin ? (
+              <a href={links.linkedin} target="_blank" rel="noreferrer" style={styles.contactRow}>
+                <Sparkles size={16} strokeWidth={2} />
+                <span>LinkedIn</span>
+              </a>
+            ) : null}
           </div>
         </Section>
       </div>

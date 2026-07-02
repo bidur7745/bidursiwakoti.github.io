@@ -496,10 +496,10 @@ export default function SettingsApp() {
         </section>
 
         <section className="settings-card settings-row-card">
-          <SettingsRow icon={Server} label="Host" value="localhost / deployed domain placeholder" />
+          <SettingsRow icon={Server} label="Host" value="Vercel / custom domain" />
           <SettingsRow icon={Globe} label="Portfolio URL" value={links.portfolio} href={links.portfolio} />
           <SettingsRow icon={ExternalLink} label="GitHub" value="bidur7745" href={links.github} />
-          <SettingsRow icon={ExternalLink} label="LinkedIn" value="Profile link" href={links.linkedin} />
+          {links.linkedin ? <SettingsRow icon={ExternalLink} label="LinkedIn" value="LinkedIn" href={links.linkedin} /> : null}
           <SettingsRow icon={Mail} label="Email" value={primaryEmail} href={links.email.work} />
         </section>
 
@@ -520,7 +520,7 @@ export default function SettingsApp() {
 
         <section className="settings-card settings-button-strip">
           <PlainAction icon={ExternalLink} href={links.github}>Open GitHub</PlainAction>
-          <PlainAction icon={ExternalLink} href={links.linkedin}>Open LinkedIn</PlainAction>
+          {links.linkedin ? <PlainAction icon={ExternalLink} href={links.linkedin}>Open LinkedIn</PlainAction> : null}
           <PlainAction icon={Copy} onClick={copyEmail}>{copiedEmail ? "Email Copied" : "Copy Email"}</PlainAction>
         </section>
       </>
@@ -544,7 +544,7 @@ export default function SettingsApp() {
         <section className="settings-card settings-row-card">
           <SettingsRow icon={UserRound} label="Public Profile" value="Enabled" badge={{ label: "Public", tone: "blue" }} />
           <SettingsRow icon={Mail} label="Contact Form" value="Frontend only / Safe mode" />
-          <SettingsRow icon={FileText} label="Resume Visibility" value="Public placeholder" />
+          <SettingsRow icon={FileText} label="Resume Visibility" value="Public PDF available inside Resume app" />
           <SettingsRow icon={ExternalLink} label="External Links" value="Open in new tab" />
           <SettingsRow icon={ShieldCheck} label="API Key Exposure" value="Protected" badge={{ label: "Safe", tone: "green" }} />
         </section>
