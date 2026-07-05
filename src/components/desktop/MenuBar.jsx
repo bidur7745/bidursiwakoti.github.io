@@ -23,6 +23,7 @@ const menuItems = [
   { label: "File" },
   { label: "Edit" },
   { label: "View" },
+  { label: "Profile", appId: "developerProfile" },
   { label: "Go", appId: "finder" },
   { label: "Projects", appId: "projects" },
   { label: "Contact", appId: "mail" },

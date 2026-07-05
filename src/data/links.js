@@ -5,7 +5,7 @@ export const links = {
   },
   phone: "tel:+9779862262556",
   github: "https://github.com/bidur7745/",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/bidur-siwakoti-1ba81a294",
   facebook: "https://www.facebook.com/bidur.siwakoti.56",
   instagram: "https://www.instagram.com/bidur.bro/",
   x: "https://x.com/SiwakotiBidur",

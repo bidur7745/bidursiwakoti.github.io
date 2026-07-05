@@ -15,6 +15,7 @@ import resumeIcon from "./icon/safari_macos_bigsur_icon_189770.png";
 import mailIcon from "./icon/mail_macos_bigsur_icon_190003.png";
 import settingsIcon from "./icon/settings_macos_bigsur_icon_189754.png";
 import previewIcon from "./icon/preview_macos_bigsur_icon_189813.png";
+import developerProfileIcon from "./icon/developer profile.png";
 import resumePdf from "./Documents/Bidur Siwakoti Resume.pdf";
 
 export const desktopAssets = {
@@ -38,6 +39,7 @@ export const desktopAssets = {
   mailIcon,
   settingsIcon,
   previewIcon,
+  developerProfileIcon,
   resumePdf,
 };
 

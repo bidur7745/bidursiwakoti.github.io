@@ -21,6 +21,7 @@ import PdfPreviewApp from "../apps/PdfPreviewApp.jsx";
 import ResumeApp from "../apps/ResumeApp.jsx";
 import SettingsApp from "../apps/SettingsApp.jsx";
 import CalculatorApp from "../apps/CalculatorApp.jsx";
+import DeveloperProfileApp from "../apps/DeveloperProfileApp.jsx";
 import TerminalApp from "../apps/TerminalApp.jsx";
 import Window from "../window/Window.jsx";
 import DesktopIcon from "./DesktopIcon.jsx";
@@ -37,6 +38,16 @@ const appRegistry = {
     icon: Sparkles,
     iconSrc: desktopAssets.aboutIcon,
     component: AboutApp,
+  },
+  developerProfile: {
+    id: "developerProfile",
+    label: "Developer Profile",
+    title: "Developer Profile",
+    subtitle: "SEO-friendly profile",
+    accent: "cyan",
+    icon: FileText,
+    iconSrc: desktopAssets.developerProfileIcon,
+    component: DeveloperProfileApp,
   },
   finder: {
     id: "finder",
@@ -123,6 +134,7 @@ const appRegistry = {
 
 const desktopIcons = [
   appRegistry.about,
+  appRegistry.developerProfile,
   appRegistry.finder,
   appRegistry.projects,
   appRegistry.calculator,
@@ -234,6 +246,14 @@ export default function Desktop() {
   }
 
   const dockItems = [
+    {
+      id: "developerProfile",
+      label: "Developer Profile",
+      icon: FileText,
+      iconSrc: desktopAssets.developerProfileIcon,
+      accent: "cyan",
+      onActivate: () => launchApp("developerProfile"),
+    },
     {
       id: "finder",
       label: "Finder",
@@ -684,8 +704,9 @@ export default function Desktop() {
           <p className="desktop-kicker">EvilEverest OS</p>
           <h1>Bidur Siwakoti</h1>
           <p>
-            A macOS-inspired portfolio desktop for projects, skills, resume, and
-            contact, built around the EvilEverest identity.
+            MERN stack developer in Nepal building React, Node.js, MongoDB,
+            Shopify, full-stack, and AI-assisted software projects inside a
+            macOS-inspired portfolio desktop.
           </p>
         </div>
       </section>
