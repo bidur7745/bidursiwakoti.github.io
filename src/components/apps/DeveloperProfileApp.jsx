@@ -93,7 +93,7 @@ export default function DeveloperProfileApp() {
           </div>
         </InfoBlock>
 
-        <InfoBlock icon={Globe2} title="Search-Friendly Identity">
+        <InfoBlock icon={Globe2} title="Developer Skills & Services">
           <div style={styles.keywordList}>
             {keywords.map((keyword) => (
               <span key={keyword} style={styles.keyword}>
